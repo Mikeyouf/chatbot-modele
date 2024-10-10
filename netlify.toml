@@ -6,3 +6,4 @@
 [dev]
   framework = "vite"
   targetPort = 5173
+  functionsPort = 9999

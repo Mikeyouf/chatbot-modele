@@ -1,0 +1,228 @@
+/* Réinitialisation des marges et paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden; /* Désactiver le scrolling inutile */
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Conteneur principal du carrousel */
+.glider-contain {
+  position: relative;
+  width: 100%;
+  max-width: 100dvw;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden; /* Assure qu'il n'y ait pas de défilement */
+}
+
+.glider {
+  display: flex;
+  overflow: hidden; /* Empêche le défilement horizontal */
+  width: 100%;
+  max-width: 100dvw;
+}
+
+.glider-prev,
+.glider-next {
+  display: block;
+  width: 50px !important;
+  height: 50px !important;
+  border: none;
+  color: #e9a865 !important;
+  font-size: 4rem !important;
+  position: absolute;
+  top: 50% !important;
+  transform: translateY(-50%);
+  z-index: 999;
+}
+
+.glider-prev {
+  left: 10px !important;
+}
+
+.glider-next {
+  right: 10px !important;
+}
+
+.chatbot-container {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; /* Permet de centrer le contenu verticalement */
+  position: relative;
+}
+
+/* Nom du chatbot */
+.chatbot-name {
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+  margin-bottom: 20px;
+}
+
+/* Intégration du chatbot */
+.chatbot-embed {
+  width: 100%;
+  max-width: 100dvw;
+  min-height: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour l'interface du chat */
+.chat-interface {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100dvw;
+  height: 100dvh;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fenêtre de chat où les messages apparaissent */
+.chat-window {
+  flex-grow: 1;
+  padding: 10px;
+  padding-bottom: 100px; /* Ajuste cette valeur en fonction de la taille de l'image */
+  overflow-y: auto; /* Assure le scroll si contenu dépasse */
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 100%;
+  background-repeat: no-repeat;
+  background-position: bottom left; /* Position en bas à gauche */
+  background-size: 100px 100px;
+}
+
+#chat-output-1 {
+  background-image: url("./images/citoyen-3.png");
+}
+
+/* Messages utilisateur */
+.chat-window .user-message {
+  align-self: flex-end; /* Aligne les messages utilisateur à droite */
+  background-color: #4caf50; /* Couleur de fond pour l'utilisateur */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 90%; /* Limite la largeur des messages */
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+/* Messages du bot */
+.chat-window .bot-message {
+  align-self: flex-start; /* Aligne les messages bot à gauche */
+  background-color: #f1f1f1; /* Couleur de fond pour le bot */
+  color: #000;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 90%; /* Limite la largeur des messages */
+  word-wrap: break-word;
+  margin-bottom: 10px;
+}
+
+/* Conteneur de l'input et du bouton d'envoi */
+.chat-input-container {
+  display: flex;
+  padding: 10px;
+  background-color: #f1f1f1;
+  position: relative;
+  z-index: 10;
+  height: 70px;
+}
+
+/* Input de message */
+.chat-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  z-index: 99;
+}
+
+/* Bouton d'envoi */
+.send-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+  background-color: #45a049;
+}
+
+@media screen and (min-width: 992px) {
+  .chatbot-container {
+    height: 90vh;
+    max-height: 90vh;
+  }
+
+  .chatbot-embed {
+    width: 100%;
+    max-width: 500px;
+    height: 80vh;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-window {
+    background-size: 200px 200px;
+    padding-bottom: 200px;
+    scroll-padding-bottom: 200px;
+  }
+
+  /* Messages utilisateur */
+  .chat-window .user-message {
+    max-width: 70%; /* Limite la largeur des messages */
+  }
+
+  /* Messages du bot */
+  .chat-window .bot-message {
+    max-width: 70%; /* Limite la largeur des messages */
+  }
+
+  .glider-prev {
+    left: 10px;
+    cursor: pointer;
+  }
+
+  .glider-next {
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .chat-interface {
+    height: 100%;
+  }
+}

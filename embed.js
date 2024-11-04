@@ -1,4 +1,3 @@
-// Chargement du widget de chatbot
 (function () {
   const config = window.embeddedChatbotConfig;
   const domain = config.domain;
@@ -12,7 +11,19 @@
   }
 
   // Charger le style du chatbot
-  loadStylesheet(`${domain}/style.css`); // Assurez-vous que l'URL est correcte pour votre fichier CSS
+  loadStylesheet(`${domain}/style.css`);
+
+  // Charger le fichier `chatbot.js`
+  function loadChatbotScript() {
+    const script = document.createElement("script");
+    script.src = `${domain}/chatbot.js`;
+    script.type = "module"; // Si chatbot.js est un module ES6
+    script.defer = true;
+    document.head.appendChild(script);
+  }
+
+  // Charger `chatbot.js`
+  loadChatbotScript();
 
   // Obtenir le conteneur du chatbot déjà présent dans le HTML
   const chatWidgetContainer = document.querySelector(".chatbot-container");
@@ -27,7 +38,7 @@
   // Bouton pour ouvrir/fermer le chatbot
   const openButton = document.createElement("button");
   openButton.textContent = "Chat";
-  openButton.className = "chat-open-button"; // Assurez-vous d'avoir cette classe dans style.css pour styliser ce bouton
+  openButton.className = "chat-open-button";
   document.body.appendChild(openButton);
 
   openButton.addEventListener("click", function () {
@@ -43,4 +54,4 @@ window.embeddedChatbotConfig = {
 };
 </script>
 <script src="https://chatbot-modele.netlify.app/embed.js" defer></script>
-<script src="https://chatbot-modele.netlify.app/chatbot.js" type="module" defer></script> */
+ */

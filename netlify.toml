@@ -7,3 +7,9 @@
   framework = "vite"
   targetPort = 5173
   functionsPort = 9999
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+

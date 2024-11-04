@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async function () {
   const chatInput = document.getElementById('chat-input-1');
   const chatOutput = document.getElementById('chat-output-1');
   const envoyerBtn = document.getElementById('envoyer-btn-1');
-  const ASSISTANT_ID_POMPIER = 'asst_rTP2BEN5XKX5kpvdRhl3ejKO';
+  const ASSISTANT_ID = (window.embeddedChatbotConfig && window.embeddedChatbotConfig.chatbotId) || 'asst_eqEQv0PzCAGyUZACXbkStVsT';
   const MAX_MESSAGES = 2000; // Limite de messages à stocker dans le localStorage
 
   // Fonction pour récupérer ou générer l'ID utilisateur avec FingerprintJS
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     localStorage.setItem('userId', userId);
   }
 
-  const historyKey = `chatbotHistory_${userId}_${ASSISTANT_ID_POMPIER}`;
+  const historyKey = `chatbotHistory_${userId}_${ASSISTANT_ID}`;
   let existingThreadId = null;
 
   // Fonction pour charger l'historique des messages depuis le localStorage
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', async function () {
           body: JSON.stringify({
             userMessage,
             thread_id: existingThreadId,
-            assistant_id: ASSISTANT_ID_POMPIER,
+            assistant_id: ASSISTANT_ID,
             user_id: userId,
           }),
         });

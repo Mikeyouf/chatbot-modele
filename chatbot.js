@@ -5,8 +5,18 @@ document.addEventListener('DOMContentLoaded', async function () {
   const chatInput = document.getElementById('chat-input-1');
   const chatOutput = document.getElementById('chat-output-1');
   const envoyerBtn = document.getElementById('envoyer-btn-1');
-  const ASSISTANT_ID = (window.embeddedChatbotConfig && window.embeddedChatbotConfig.chatbotId) || 'asst_eqEQv0PzCAGyUZACXbkStVsT';
+  const openChatbotButton = document.getElementById('open-chatbot'); // Bouton pour ouvrir/fermer le chatbot
+  const chatbotContainer = document.querySelector('.chatbot-container'); // Conteneur du chatbot
+  // const ASSISTANT_ID = (window.embeddedChatbotConfig && window.embeddedChatbotConfig.chatbotId) || 'asst_eqEQv0PzCAGyUZACXbkStVsT';
+  const ASSISTANT_ID = 'asst_eqEQv0PzCAGyUZACXbkStVsT';
+
   const MAX_MESSAGES = 2000; // Limite de messages à stocker dans le localStorage
+
+  // Gestion de l'affichage/masquage du chatbot
+  openChatbotButton.addEventListener('click', () => {
+    const isChatbotVisible = chatbotContainer.style.display === 'block';
+    chatbotContainer.style.display = isChatbotVisible ? 'none' : 'block';
+  });
 
   // Fonction pour récupérer ou générer l'ID utilisateur avec FingerprintJS
   let userId = localStorage.getItem('userId');
@@ -46,12 +56,8 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   // Fonction pour supprimer les annotations de type [source] et autres balises JSON
   function cleanResponse(text) {
-    // Supprimer les annotations OpenAI
     const cleanedText = text.replace(/【\d+:\d+†[^\]]+】/g, '').trim();
-
-    // Remplacer les formats Markdown [texte](lien) par des liens HTML corrects
     const formattedText = cleanedText.replace(/\[([^\]]+)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-
     return formattedText;
   }
 
@@ -63,7 +69,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   const sendMessage = async () => {
     const userMessage = chatInput.value;
     if (userMessage) {
-      // Afficher et sauvegarder le message utilisateur
       chatOutput.innerHTML += `<p class="user-message"> ${userMessage}</p>`;
       saveMessage('user', userMessage);
       chatInput.value = '';
@@ -89,12 +94,6 @@ document.addEventListener('DOMContentLoaded', async function () {
           botResponse = cleanResponse(botResponse);
 
           existingThreadId = data.threadId;
-
-          // if (botResponse.includes("http")) {
-          //   botResponse = botResponse.replace(/(http[^\s]+)/g, '<a href="$1" target="_blank">$1</a>');
-          // }
-
-          // Afficher et sauvegarder la réponse du bot
           chatOutput.innerHTML += `<p class="bot-message"> ${botResponse}</p>`;
           saveMessage('bot', botResponse);
           scrollToBottom();
